@@ -5,12 +5,69 @@ namespace TelegramBot\Api;
 use Closure;
 use ReflectionFunction;
 use TelegramBot\Api\Events\EventCollection;
+use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
+use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
 /**
  * Class Client
  *
  * @package TelegramBot\Api
+ * @method bool setMethodObject($mode = true)
+ * @method mixed call(string $method, array $data)
+ * @method string executeCurl(array $options)
+ * @method void curlValidate(resource $curl, string $response)
+ * @method object|array jsonValidate(string $jsonString, boolean $string)
+ * @method \TelegramBot\Api\Types\Message sendMessage(int $chatId, string $text, string $parseMode = null, bool $disablePreview = false, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup = null, bool $disableNotification = false)
+ * @method \TelegramBot\Api\Types\Message sendContact(int|string $chatId, string $phoneNumber, string $firstName, string $lastName = null, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup = null, bool $disableNotification = false)
+ * @method bool sendChatAction(int $chatId, string $action)
+ * @method \TelegramBot\Api\Types\UserProfilePhotos getUserProfilePhotos(int $userId, int $offset, int $limit)
+ * @emthod string setWebhook(string $url = '', \CURLFile|string $certificate = null)
+ * @method \TelegramBot\Api\Types\User getMe()
+ * @method Update[] getUpdates(int $offset = 0, int $limit = 100, int $timeoud = 0)
+ * @method Message sendLocation(int|string $chatId, float $latitude, float $longitude, int|null $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup = null, bool $disableNotification = false, bool $livePeriod = null)
+ * @method Message editMessageLiveLocation(int|string $chatId, int $messageId, string $inlineMessageId, float $latitude, float $longtitude, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null)
+ * @method Message stopMessageLiveLocation(int|string $chatId, int $messageId, string $inlineMessageId, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup = null)
+ * @method Message sendVenue(int|string $chatId, float $latitude, float $longtitude, string $title, string $address, string $foursquareId = null, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null, bool $disableNotification = false)
+ * @method Message sendSticker(int|string $chatId, \CURLFile|string $sticker, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null, bool $disableNotification)
+ * @method Message sendVideo(int|string $chatId, \CURLFile|string $video, int $duration = null, string $caption = null, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null), bool $disableNotification
+ * @method Message sendVoice(int|string $chatId, \CURLFile|string $voice, int $duration = null, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null, bool $disableNotification)
+ * @method Message forwardMessage(int|string $chatId, int $fromChatId, int $messageId, bool $disableNotification)
+ * @method Message sendAudio(int|string $chatId, \CURLFile|string $audio, int $duration = null, string $performer = null, string $title = null, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null, bool $disableNotification = false)
+ * @method Message sendPhoto(int|string $chatId, \CURLFile|string $photo, string $caption = null, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null, bool $disableNotification = false)
+ * @method Message sendDocument(int|string $chatId, \CURLFile|string $document, string $caption = null, int $replyToMessageId = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null, bool $disableNotification = false)
+ * @method \TelegramBot\Api\Types\File getFile(string $fileId)
+ * @method string downloadFile(string $fileId)
+ * @method mixed answerInlineQuery(string $inlineQueryId, AbstractInlineQueryResult[] $results, int $cacheTime = 300, bool $isPersonal = false, string $nextOffset = '', string $switchPmText = null, string $switchPmParameter = null)
+ * @method bool kickChatMember(int|string $chatId, int $userId, int $untilDate = null)
+ * @method bool unbanChatMember(int|string $chatId, int $userId)
+ * @method bool answerCallbackQuery(string $callbackQueryId,string $text = null, bool $showAlert = false )
+ * @method Message editMessageText(int|string $chatId, int $messageId, string $text, string $inlineMessageId, string|null $parseMode, bool $disablePreview, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup)
+ * @method Message  editMessageCaption(int|string $chatId, int $messageId, string $caption = null, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null, string $inlineMessageId = null)
+ * @method Message editMessageReplyMarkup(int|string $chatId, int $messageId, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply $replyMarkup = null, string $inlineMessageId)
+ * @method bool deleteMessage(int|string $chatId, int $messageId)
+ * @method string getUrl()
+ * @method string getFileUrl()
+ * @method void trackUpdate(Update $update, $eventName = 'Message')
+ * @method void track(Message $message, $eventName = 'Message')
+ * @method Message sendInvoice(int|string $chatId, string $title, string $description, string $payload, string $providerToken, string $startParameter, string $currency, array $prices, string|null $photoUrl, int|null $photoSize, int|null $photoWidth, int|null $photoHeight, bool $needName, bool $needPhoneNumber, bool $needEmail, bool $needShippingAddress, bool $isFlexible, int|null $replyToMessageId, Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup, bool $disableNotification)
+ * @method bool answerShippingQuery()
+ * @method mixed answerPreCheckoutQuery()
+ * @method bool restrictChatMember()
+ * @method bool promoteChatMember()
+ * @method bool exportChatInviteLink()
+ * @method bool setChatPhoto()
+ * @method bool deleteChatPhoto()
+ * @method bool setChatTitle()
+ * @method bool setChatDescription()
+ * @method bool pinChatMessage()
+ * @method bool unpinChatMessage()
+ * @method bool getChat()
+ * @method bool getChatMember()
+ * @method bool leaveChat()
+ * @method bool getChatMembersCount()
+ * @method bool getChatAdministrators()
+ *
  */
 class Client
 {
